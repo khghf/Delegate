@@ -12,7 +12,6 @@ namespace DM
 	private:
 		using FunType = Ret(*)(Args...);
 		std::unordered_map<size_t, BaseDelegate<Ret(Args...)>>Delegates;
-		std::string_view Name;
 	public:
 		MultiDelegate() = default;
 		//普通函数
@@ -79,13 +78,9 @@ namespace DM
 				else
 				{
 					it = Delegates.erase(it);
-					std::cout << Name << ":found and removed invalid delegate" << std::endl;
+					std::cout <<":found and removed invalid delegate" << std::endl;
 				}
 			}
-		}
-		void SetName(const std::string_view& name)
-		{
-			Name = name;
 		}
 		int Count()const
 		{

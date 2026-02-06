@@ -7,11 +7,10 @@ void TestFun()
 {
 	std::cout << "TestFun()" << std::endl;
 }
-static int TestStaticFun(int a)
+static int TestStaticFun(std::string a)
 {
-	std::cout << "TestStaticFun()" << std::endl;
-	std::cout << a << std::endl;
-	return a;
+	std::cout << "TestStaticFun():"<<a << std::endl;
+	return 2;
 }
 void BindFun_Test()
 {
@@ -21,9 +20,9 @@ void BindFun_Test()
 }
 void BindStaticFun_Test()
 {
-	BaseDelegate<int(int)>Test;
+	BaseDelegate<int(std::string)>Test;
 	Test.Bind(TestStaticFun);
-	Test.Execute(1);
+	Test.Execute("2222222222");
 }
 class MebFunTest
 {

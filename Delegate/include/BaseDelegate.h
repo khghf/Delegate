@@ -12,14 +12,12 @@ namespace DM
 		using FunType = Ret(*)(Args...);
 		using HashKey = size_t;
 		HashKey key;
-		std::string_view Name;
 	public:
 		BaseDelegate()= default;
 		BaseDelegate(BaseDelegate&& other)noexcept
 		{
 			this->DelegateInstance = other.DelegateInstance;
 			this->key = other.key;
-			this->Name = other.Name;
 			other.DelegateInstance = nullptr;
 		}
 		BaseDelegate& operator=(BaseDelegate&& other)noexcept
@@ -29,7 +27,6 @@ namespace DM
 			this->DelegateInstance = other.DelegateInstance;
 			other.DelegateInstance = nullptr;
 			this->key = other.key;
-			this->Name = other.Name;
 			return *this;
 		}
 		BaseDelegate(const BaseDelegate& other)
@@ -37,7 +34,6 @@ namespace DM
 			if (other.DelegateInstance == nullptr)return;
 			this->DelegateInstance = other.DelegateInstance->Clone();
 			this->key = other.key;
-			this->Name = other.Name;
 		}
 		BaseDelegate& operator=(const BaseDelegate& other)
 		{
@@ -47,7 +43,6 @@ namespace DM
 				if (this->DelegateInstance)delete this->DelegateInstance;
 				this->DelegateInstance = other.DelegateInstance->Clone();
 				this->key = other.key;
-				this->Name = other.Name;
 			}
 			return *this;
 		}
@@ -88,10 +83,6 @@ namespace DM
 		inline HashKey Key()const
 		{
 			return key;
-		}
-		void SetName(const std::string_view& name)
-		{
-			Name = name;
 		}
 	private:
 		IDelegateInstance<Ret, Args...>* DelegateInstance = nullptr;
